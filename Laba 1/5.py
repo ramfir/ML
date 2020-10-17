@@ -22,10 +22,10 @@ recordsUkr = getRecords(idUkr)
 
 result = [['Дата', 'Доллар США', 'Евро', 'Индийская Рупия', 'Украинская гривна']]
 for i in range(len(recordsUSA)):
-    result.append([recordsUSA[i]['Date'],recordsUSA[i].Value.text,
-                   recordsEuro[i].Value.text,
-                   recordsInd[i].Value.text,
-                   recordsUkr[i].Value.text])
+    result.append([recordsUSA[i]['Date'],float(recordsUSA[i].Value.text.replace(",","."))/float(recordsUSA[i].Nominal.text),
+                   float(recordsEuro[i].Value.text.replace(",","."))/float(recordsEuro[i].Nominal.text),
+                   float(recordsInd[i].Value.text.replace(",","."))/float(recordsInd[i].Nominal.text),
+                   float(recordsUkr[i].Value.text.replace(",","."))/float(recordsUkr[i].Nominal.text)])
 with open('currency.csv', 'w') as file:
     writer = csv.writer(file)
     for row in result:
